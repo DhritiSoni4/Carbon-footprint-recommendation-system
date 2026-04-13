@@ -111,13 +111,7 @@ Open `http://localhost:8501` in your browser.
 | 💡 Recommendations | Top 5 personalised, ranked action items |
 | 🔮 What-If Simulator | Change transport / diet / energy → see projected impact |
 
----
 
-## 📸 Screenshots
-
-> *(Add screenshots of the running app here)*
-
----
 
 ## 📌 Key Decisions & Learnings
 
@@ -125,8 +119,3 @@ Open `http://localhost:8501` in your browser.
 - **Stacking over single model**: Stacking GradientBoosting + ExtraTrees under a Ridge meta-learner reduces variance and gives the best generalisation.
 - **Rule-based recommendations on top of ML**: The model predicts the footprint; a transparent rule layer interprets the inputs to generate human-readable, actionable advice.
 
----
-
-## 👤 Author
-
-Your Name · [GitHub](https://github.com/YOUR_USERNAME) · [LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
