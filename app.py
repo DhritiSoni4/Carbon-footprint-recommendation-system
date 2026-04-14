@@ -156,7 +156,7 @@ try:
     MODEL_LOADED = True
 except Exception as e:
     MODEL_LOADED = False
-    st.error(f"❌ Model not found. Run `python train_and_save.py` first.\n\n{e}")
+    st.error(f" Model not found. Run `python train_and_save.py` first.\n\n{e}")
     st.stop()
 
 # ── Emission factors ──────────────────────────────────────────────────────────
@@ -213,24 +213,24 @@ def generate_recommendations(transport_mode, distance_km, electricity_kwh,
     for src, val in top2:
         if src == "Transport" and val > 1.5:
             if transport_mode == "Car":
-                recs.append(("🚌 Switch Transport Mode",
+                recs.append((" Switch Transport Mode",
                     "You're using a car for " + f"{distance_km:.0f} km/day. Switching to public "
                     "transport 3×/week could cut transport emissions by ~50%."))
             elif transport_mode in ("Bike", "Bus"):
-                recs.append(("🚂 Try Rail for Long Trips",
+                recs.append((" Try Rail for Long Trips",
                     "For trips over 50 km, trains emit ~5× less than cars and are often faster city-to-city."))
 
         if src == "Electricity" and val > 2:
             if renewable_pct < 30:
-                recs.append(("☀️ Adopt Renewable Energy",
+                recs.append((" Adopt Renewable Energy",
                     f"Your renewable usage is only {renewable_pct}%. Even shifting 30% to solar "
                     "can reduce electricity emissions by ~25 kg CO₂e/month."))
             else:
-                recs.append(("💡 Reduce Peak Consumption",
+                recs.append((" Reduce Peak Consumption",
                     "Shift heavy appliances (AC, washing machine) to off-peak hours and use 5-star rated devices."))
 
         if src == "Waste" and val > 1:
-            recs.append(("♻️ Waste Reduction",
+            recs.append((" Waste Reduction",
                 f"You generate {waste_kg:.1f} kg waste/day. Composting organic waste and segregating recyclables "
                 "can cut waste emissions by ~40%."))
 
@@ -240,20 +240,20 @@ def generate_recommendations(transport_mode, distance_km, electricity_kwh,
                 "reducing video streaming quality can meaningfully lower digital emissions."))
 
     if food_type == "Non-Veg":
-        recs.append(("🥗 Dietary Shift",
+        recs.append((" Dietary Shift",
             "Non-veg diets produce ~2.5× more emissions than plant-based. "
             "Adding 2–3 vegetarian days per week can save ~0.8 kg CO₂e/day."))
     elif food_type == "Mixed":
-        recs.append(("🌱 Go More Plant-Based",
+        recs.append((" Go More Plant-Based",
             "Reducing meat to once a week and favouring legumes and vegetables can lower dietary footprint by ~30%."))
 
     if renewable_pct < 20:
-        recs.append(("🔋 Rooftop Solar",
+        recs.append((" Rooftop Solar",
             "A 1 kW rooftop solar panel in India generates ~4–5 kWh/day — enough to offset "
             "a significant fraction of household electricity needs."))
 
     if eco_actions <= 1:
-        recs.append(("🛍️ Build Eco-Habits",
+        recs.append((" Build Eco-Habits",
             "Carrying a reusable bag/bottle, avoiding single-use plastics, and choosing local produce "
             "are low-effort actions that compound over time."))
 
@@ -339,7 +339,7 @@ with st.sidebar:
     st.markdown("""
     <div style='padding:1rem; background:#0d1117; border:1px solid #21262d; border-radius:8px;
                 font-size:0.82rem; color:#8b949e; line-height:1.8;'>
-        <b style='color:#e6edf3;'>ℹ️ How to use</b><br>
+        <b style='color:#e6edf3;'> How to use</b><br>
         Fill in your daily lifestyle habits in the <b style='color:#3fb950;'>inputs below</b> on the main page,
         then scroll down to see your footprint, breakdown, comparison, and what-if scenarios.
     </div>
@@ -369,7 +369,7 @@ st.markdown("""
 st.markdown("""
 <div style='background:#161b22; border:1px solid #30363d; border-radius:14px; padding:1.5rem 1.8rem 0.5rem 1.8rem; margin-bottom:1.5rem;'>
     <div style='font-family:Syne; font-size:1.05rem; font-weight:700; color:#e6edf3; margin-bottom:1rem;'>
-        📋 Enter Your Daily Lifestyle Data
+         Enter Your Daily Lifestyle Data
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -459,7 +459,7 @@ st.markdown(f"""
 st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab1, tab2, tab3 = st.tabs(["📊 Breakdown", "🌏 Comparison", "🔮 What-If Simulator"])
+tab1, tab2, tab3 = st.tabs([" Breakdown", " Comparison", " What-If Simulator"])
 
 # ── Tab 1 — Breakdown ─────────────────────────────────────────────────────────
 with tab1:
@@ -501,7 +501,7 @@ with tab2:
     c1, c2 = st.columns(2)
     with c1:
         clr = "#3fb950" if diff_india <= 0 else "#f85149"
-        msg = "below 🎉" if diff_india <= 0 else "above ⚠️"
+        msg = "below 🎉" if diff_india <= 0 else "above "
         st.markdown(f"""
         <div class='metric-card'>
             <div class='val' style='color:{clr};'>{abs(diff_india):.2f} kg</div>
@@ -509,7 +509,7 @@ with tab2:
         </div>""", unsafe_allow_html=True)
     with c2:
         clr = "#3fb950" if diff_global <= 0 else "#f85149"
-        msg = "below 🎉" if diff_global <= 0 else "above ⚠️"
+        msg = "below 🎉" if diff_global <= 0 else "above "
         st.markdown(f"""
         <div class='metric-card'>
             <div class='val' style='color:{clr};'>{abs(diff_global):.2f} kg</div>
@@ -519,7 +519,7 @@ with tab2:
     st.markdown("""
     <div style='margin-top:1.5rem; padding:1rem; background:#161b22; border-radius:10px;
                 border:1px solid #30363d; font-size:0.88rem; color:#8b949e; line-height:1.7;'>
-        <b style='color:#e6edf3;'>📌 Context</b><br>
+        <b style='color:#e6edf3;'> Context</b><br>
         India's per-capita carbon footprint is ~1.9 tonnes CO₂e/year (~5.2 kg/day).
         The dataset mean is ~8 kg/day reflecting daily activity-level tracking.
         The global average of ~13 kg/day reflects higher energy consumption in developed nations.
@@ -535,7 +535,7 @@ with tab3:
     w1, w2 = st.columns(2, gap="large")
 
     with w1:
-        st.markdown("**🔧 Adjust one habit at a time:**")
+        st.markdown("** Adjust one habit at a time:**")
 
         # Smart defaults: pick a greener transport than current
         transport_options = list(TRANSPORT_FACTORS.keys())
@@ -561,7 +561,7 @@ with tab3:
         wi_food = st.selectbox("Diet", diet_order, index=default_diet_idx, key="wi_f")
 
     with w2:
-        st.markdown("**📈 Projected outcomes:**")
+        st.markdown("**Projected outcomes:**")
 
         # Capture current baseline values explicitly to avoid closure issues
         _base = {
