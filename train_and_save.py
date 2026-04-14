@@ -116,7 +116,7 @@ joblib.dump(preprocessor, "model/preprocessor.pkl")
 joblib.dump(ALL_FEATURES, "model/feature_names.pkl")
 joblib.dump(metrics,      "model/model_metrics.pkl")
 
-print("\n✅ Saved to model/")
+print("\n Saved to model/")
 print("   • stacking_model.pkl")
 print("   • preprocessor.pkl")
 print("   • feature_names.pkl")
